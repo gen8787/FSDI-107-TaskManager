@@ -9,6 +9,9 @@ namespace TaskManager.Controllers
         public IActionResult Test()
         {
             var list = new List<string>();
+            list.Add("task1");
+            list.Add("task2");
+            list.Add("task3");
 
             return Json(list);
         }

@@ -89,7 +89,6 @@ function createTask(e) {
     var inputImportant = isImportant;
     var inputStartDate = $("#taskStartDate").val();
     var inputEndDate = $("#taskEndDate").val();
-    console.log(inputEndDate);
     var inputStatus = $("#taskStatus").val();
     var inputDescription = $("#taskDescription").val();
 
@@ -255,7 +254,6 @@ function completeTask(taskId) {
 // I N I T
 function init() {
     console.log("Document ready.");
-    console.log(new Date);
 
     // E V E N T   L I S T E N E R S
     $("#btnHideShow").click(hideShow);
