@@ -1,5 +1,5 @@
 // G L O B A L   V A R I A B L E S
-var serverURL = "http://fsdi.azurewebsites.net/api";
+var serverURL = "https://fsdi.azurewebsites.net/api";
 
 let isHidden = true;
 let isImportant = true;
@@ -158,7 +158,7 @@ function createTask(e) {
     
     // C R E A T E   I N   S E R V E R
     $.ajax({
-        url: serverURL + '/tasks',
+        url: '/api/CreateTask',
         type: 'POST',
         data: JSON.stringify(newTask),
         contentType: 'application/json',

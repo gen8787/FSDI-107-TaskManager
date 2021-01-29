@@ -29,18 +29,21 @@ namespace TaskManager.Controllers
         }
 
     // P R I V A C Y   P A G E
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
         }
 
     // A B O U T   P A G E
+        [HttpGet]
         public IActionResult About()
         {
             return View();
         }
 
     // T A S K S   P A G E
+        [HttpGet]
         public IActionResult Tasks()
         {
             return View();
