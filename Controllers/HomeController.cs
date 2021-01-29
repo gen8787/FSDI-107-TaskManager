@@ -25,28 +25,28 @@ namespace TaskManager.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
     // P R I V A C Y   P A G E
         [HttpGet]
         public IActionResult Privacy()
         {
-            return View();
+            return View("Privacy");
         }
 
     // A B O U T   P A G E
         [HttpGet]
         public IActionResult About()
         {
-            return View();
+            return View("About");
         }
 
     // T A S K S   P A G E
         [HttpGet]
         public IActionResult Tasks()
         {
-            return View();
+            return View("Tasks");
         }
 
 //<~~ E N D   O F   M A I N   V I E W S ~~> //

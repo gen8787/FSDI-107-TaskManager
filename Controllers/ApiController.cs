@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Models;
 
@@ -6,9 +7,44 @@ namespace TaskManager.Controllers
 {
     public class ApiController : Controller 
     {
+        private DataContext db;
+        public ApiController(DataContext context)
+        {
+            db = context;
+        }
+
         // G E T   A L L   T A S K S
         [HttpGet]
-        public IActionResult GetAllTasks()
+        public IActionResult AllTasks()
+        {
+            var AllTasks = db.Tasks
+                .OrderBy(t => t.DueDate)
+                // .Where(t => t.Id < 50).Take(25)
+                .ToList();
+            return Json(AllTasks);
+        }
+
+        public IActionResult ClearTasks()
+        {
+            db.Tasks.RemoveRange(db.Tasks.ToList());
+            db.SaveChanges();
+            return Content("Tasks removed");
+        }
+
+        [HttpGet("/api/DeleteTask/{TaskId}")]
+        public IActionResult DeleteTask(int TaskId)
+        {
+            var task = db.Tasks.FirstOrDefault(t => t.Id == TaskId);
+            db.Tasks.Remove(task);
+            db.SaveChanges();
+
+            return Json("Deleted");
+        }
+
+
+        // G E T   O N E   T A S K S
+        [HttpGet]
+        public IActionResult OneTask()
         {
             return null;
         }
@@ -21,8 +57,13 @@ namespace TaskManager.Controllers
             System.Console.WriteLine("Saving new task object..." + newTask.Title);
 
             // validate / sanitize input HOMEWORK
+            if (!ModelState.IsValid)
+            {
+                return View("Tasks");
+            }
 
-            newTask.Id = 1;
+            db.Tasks.Add(newTask);
+            db.SaveChanges();
 
             return Json(newTask);
         }

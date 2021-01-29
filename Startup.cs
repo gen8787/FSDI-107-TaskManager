@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TaskManager.Models;
 
 namespace TaskManager
 {
@@ -24,6 +26,9 @@ namespace TaskManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+        //~~ A D D   L I N E S  B E L O W ~~ //
+            // string conString = "Data Source=TaskDb.db";
+            services.AddDbContext<DataContext>(options => options.UseSqlite ("Data Source=TaskDb.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

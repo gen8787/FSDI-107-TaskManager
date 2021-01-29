@@ -20,7 +20,7 @@ var { nextTaskId, tasks } = allTasks;
 // G E T   D A T A
 function getData() {
     $.ajax({
-        url: serverURL + '/tasks',
+        url: '/api/AllTasks',
         type: 'GET',
         success: res => {
             console.log(res);
@@ -33,7 +33,7 @@ function getData() {
             }
         },
         error: err => console.log(err)
-    });
+    })
 }
 
 
@@ -87,37 +87,37 @@ function createTask(e) {
     var inputTaskId = $("#taskId").val();
     var inputTask = $("#task").val();
     var inputImportant = isImportant;
-    var inputStartDate = $("#taskStartDate").val();
-    var inputEndDate = $("#taskEndDate").val();
+    var inputStartDate = new Date($("#taskStartDate").val());
+    var inputEndDate = new Date($("#taskEndDate").val());
     var inputStatus = $("#taskStatus").val();
     var inputDescription = $("#taskDescription").val();
 
     // U P D A T E   T A S K
-    for (var i = 0; i < tasks.length; i ++) {
-        var task = tasks[i];
+    // for (var i = 0; i < tasks.length; i ++) {
+    //     var task = tasks[i];
 
-        if (task.taskId == inputTaskId) {
-            task.task = inputTask;
-            task.important = inputImportant;
-            task.startDate = inputStartDate;
-            task.dueDate = inputEndDate;
-            task.status = inputStatus;
-            task.description = inputDescription;
+    //     if (task.taskId == inputTaskId) {
+    //         task.task = inputTask;
+    //         task.important = inputImportant;
+    //         task.startDate = inputStartDate;
+    //         task.dueDate = inputEndDate;
+    //         task.status = inputStatus;
+    //         task.description = inputDescription;
 
-            if (isImportant == true) {
-                importantHandler();
-            }
+    //         if (isImportant == true) {
+    //             importantHandler();
+    //         }
             
-            $(".form-control").val("");
-            $(".form-select").val("");
-            $("#taskSubmit").val("Add Task");
+    //         $(".form-control").val("");
+    //         $(".form-select").val("");
+    //         $("#taskSubmit").val("Add Task");
 
 
-            displayAllTasks();
+    //         displayAllTasks();
 
-            return;
-        }
-    }
+    //         return;
+    //     }
+    // }
 
     // V A L I D A T I O N S
     let errors = false;
@@ -131,6 +131,11 @@ function createTask(e) {
     if (!inputDescription) {
         errors = true;
         $("#errors").append(`<li>Please enter a description.</li>`);
+    }
+
+    if (inputStartDate > inputEndDate) {
+        errors = true;
+        $("#errors").append(`<li>End date must be after start date.</li>`);
     }
 
     if (errors) {
@@ -181,11 +186,15 @@ function displayOneTask(task) {
         importantIcon = `<i id="" class="fas fa-star mx-2"></i>`
     }
 
+    var dueDate = new Date(task.dueDate);
+    var dueDateDate = dueDate.toDateString();
+    var dueDateTime = dueDate.toLocaleTimeString();
+
     var oneTask = `
         <div class="oneTask my-4 pt-3 d-flex align-items-center justify-content-between shadow px-3">
             <p class="">${importantIcon}</p>
             <p class="">${task.title}</p>
-            <p class=""><i class="fas fa-calendar-alt">${task.dueDate}</i></p>
+            <p class=""><i class="fas fa-calendar-alt"> Due: ${dueDateDate} @ ${dueDateTime}</i></p>
             <p class=""><i class="fas fa-info-circle" onclick="getOneTask(${task.id})"></i> Info</p>
             <p class=""><i class="complete far fa-square" onclick="completeTask(${task.id})"> Complete</i></p>
         </div>
@@ -239,7 +248,7 @@ function completeTask(taskId) {
     }
 
     $.ajax({
-        url: serverURL + `/tasks/${taskId}`,
+        url: `/api/DeleteTask/${taskId}`,
         type: 'DELETE',
         success: res => {
             console.log(res);
@@ -247,7 +256,7 @@ function completeTask(taskId) {
         error: err => console.log(err)
     });
 
-    displayAllTasks();
+    getData();
 }
 
 

@@ -3,11 +3,10 @@ class Task{
         this.taskId = taskId;
         this.title = title;
         this.important = important,
-        this.startDate = startDate;
-        this.dueDate = dueDate;
+        this.startDate = new Date(startDate);
+        this.dueDate = new Date (dueDate);
         this.status = status;
         this.description = description;
-
         this.user = "gary";
     }
 }

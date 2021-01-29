@@ -1,21 +1,25 @@
-## First web application with .net core
+# FSDI 107 - Competency Report
+###  Asp.net Core Solutions
 
-### Please deliver an MVC DotNet Core project with:
+## Task Manager - Full website
+### Please deliver a calendar management system.
 
-- [x] A web application that presents a home page
+##### Functional requirements:
 
-- [x] The menu for the project it's declared on a Layout page that can be included in multiple pages in the future
+- [x] Allows the user to create new Tasks
+- [x] Show the tasks to the user when getting into the Tasks page.
+- [x] Allows the user to navigate between pages using the navigation menu
+- [x] It contains the required CSS to make it look amazing.
+- [x] Contains an About page to show the developer name
+- [x] Verify consistency on the dates when creating a Task (end-date should no be lower than start date)
+##### Technical Requirements:
 
-- [x] A page that displays your name on the /Home/About endpoint
+- [x] The backed is on ASP.Net Core 3 or greater
+- [x] SQLite it's used for database, and Entity Framework to access such a database
+- [x] The front end is on Javascript
+- [x] The communication front end - API uses AJAX HTTP request
 
-- [x] A place holder page for the Task Manager project
+##### Challenge (not required):
+- [x] Display the items sorted by date.
 
-- [x] A JavaScript file that is performing POST request to an endpoint on backed and sends the Task object created on JS using an AJAX request.
-
-- [x] The controller on the backed must have an endpoint that is caching the AJAX request, setting the ID to 1, and returning the object as a Json result.
-
-- [x] Display on the front the created Task.
-
-- [x] Show the user proper alert for Error or Success events.
-
-![](images/TaskManager.png)
+![](img/TaskManager.png)
