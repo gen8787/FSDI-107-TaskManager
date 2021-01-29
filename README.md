@@ -22,4 +22,4 @@
 ##### Challenge (not required):
 - [x] Display the items sorted by date.
 
-![](img/TaskManager.png)
+![](/wwwroot/img/TaskManager.png)
