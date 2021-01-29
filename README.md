@@ -22,4 +22,7 @@
 ##### Challenge (not required):
 - [x] Display the items sorted by date.
 
+##### Additional Functionality Implemented:
+- [x] Delete Task and remove from database.
+
 ![](/wwwroot/img/TaskManager.png)

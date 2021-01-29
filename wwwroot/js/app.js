@@ -19,6 +19,8 @@ var { nextTaskId, tasks } = allTasks;
 
 // G E T   D A T A
 function getData() {
+    $("#allTasks").html("");
+
     $.ajax({
         url: '/api/AllTasks',
         type: 'GET',
@@ -208,6 +210,7 @@ function displayOneTask(task) {
 // D I S P L A Y   A L L   T A S K S
 function displayAllTasks() {
     $("#allTasks").html("");
+    
 
     for (var i = 0; i < tasks.length; i ++) {
         displayOneTask(tasks[i]);
@@ -249,14 +252,13 @@ function completeTask(taskId) {
 
     $.ajax({
         url: `/api/DeleteTask/${taskId}`,
-        type: 'DELETE',
+        type: 'GET',
         success: res => {
             console.log(res);
+            getData();
         },
-        error: err => console.log(err)
+        error: err => console.log("Error: " + err)
     });
-
-    getData();
 }
 
 

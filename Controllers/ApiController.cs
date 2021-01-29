@@ -31,10 +31,10 @@ namespace TaskManager.Controllers
             return Content("Tasks removed");
         }
 
-        [HttpGet("/api/DeleteTask/{TaskId}")]
+        [HttpGet("api/deletetask/{TaskId}")]
         public IActionResult DeleteTask(int TaskId)
         {
-            var task = db.Tasks.FirstOrDefault(t => t.Id == TaskId);
+            Task task = db.Tasks.FirstOrDefault(t => t.Id == TaskId);
             db.Tasks.Remove(task);
             db.SaveChanges();
 
